@@ -1,0 +1,31 @@
+1. Firstly there is a user/Subscriber who is our main character.
+
+2. There are three types of plans based on category namely music, video and podcast. We'll implement inheritance here and extend a    master class Plan. This should be an abstract class/interface. Lets first check the pros and cons before using such things. As     abstract classes can have properties along with non abstract methods we'll use abstract class. 
+
+  
+3. Each plan has three categories namely free, personal and premium. One user can by default use "only one plan per category".
+    Let's dive deeper into the above statement. What does this mean? 
+    1. User can have mutiple plans.
+    2. User can have mutiple same plans but of different category ie. eg. user cannot have two music streaming plans where both           are free. But user can have two music streaming plan of different categories ie. one is free and the other is paid.
+
+
+    Let us talk about the low level design of our classes.
+
+    1. "User can have multiple plans". This means the User/Subscriber object will have some data structure containing a collection         of plans.
+    2.  Each time a user buys a plan we need to check if that particular plan exists already for the user and if it does we need           to check the category of that plan. If it already exists then we will not add it to the existing collection otherwise we           will. So we need to check if the plan exists. Searching is faster in maps so we will probably use a map for this. 
+    3.  If we use a hashmap what will be the key value structure of the map?
+        Let's dive further into this.
+        1. If category which is a string will be the key we will not get any benefit of using a map. 
+        2. So the plans the user has will be a list.
+        3. While buying a plan we will first check if plan if that type exists in the list. If it does we will check its category.
+           If category is not same we will add otherwise we will not add. This operation will be quite expensive.
+        
+
+  
+   
+
+4. All plans by default are streamed only on one device so each user has a property called number of devices. // done
+
+
+
+
