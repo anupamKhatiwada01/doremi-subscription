@@ -32,21 +32,47 @@ public class Main {
 
 
       // Lets  directly create objects and not bother about using complex structures
-      List topupList = new ArrayList<Topup>();
+      List<Topup> topupList = new ArrayList<Topup>();
       topupList.add(new Topup("FOUR_DEVICE",4,1,50));
       topupList.add(new Topup("TEN_DEVICE",10,1,100));
+
+      Map<String,Map<String,Integer[]>> planMap = new HashMap<String,Map<String,Integer[]>>();
+
+        Map<String,Integer[]> musicCategoryMap = new HashMap<String, Integer[]>();
+        Integer[][] musicArr ={{0,1},{100,1},{250,3}}; 
+        musicCategoryMap.put("free",musicArr[0]);
+        musicCategoryMap.put("personal",musicArr[1]);
+        musicCategoryMap.put("premium",musicArr[2]);
+        planMap.put("music",musicCategoryMap);
+
+        Map<String,Integer[]> videoCategoryMap = new HashMap<String, Integer[]>();
+        Integer[][] videoArr ={{0,1},{200,1},{500,3}};
+        videoCategoryMap.put("free",videoArr[0]);
+        videoCategoryMap.put("personal",videoArr[1]);
+        videoCategoryMap.put("premium",videoArr[2]);
+        planMap.put("video",videoCategoryMap);
+
+        Map<String,Integer[]> podcastCategoryMap = new HashMap<String, Integer[]>();
+        Integer[][] podcastArr ={{0,1},{100,1},{300,3}};
+        podcastCategoryMap.put("free",podcastArr[0]);
+        podcastCategoryMap.put("personal",podcastArr[1]);
+        podcastCategoryMap.put("premium",podcastArr[2]);
+        planMap.put("podcast",podcastCategoryMap);
+        System.out.println("This is the plan map:");
+        System.out.println(planMap);
+
+
+      
 
 
       Subscriber user = new Subscriber();
       // Add topup for user if it exists
       if(!topupType.equals("")){
-
-              ArrayList arr = (ArrayList)topupList.stream().filter(a->a.getType().toUpperCase().equals(topupType.toUpperCase())).collect(Collectors.toList());
-          
+          List arr = topupList.stream().filter(a->a.getCategory().toUpperCase().equals(topupType.toUpperCase())).collect(Collectors.toList());
           Topup userTopup = (Topup)arr.get(0);
           userTopup.setTotalPrice(topupMonths);
           if(user.addTopUp(userTopup)==false){
-            throw new Exception("Topup cannot be added as one is already active");
+            throw new Exception("Topup cannot be added.");
           }
       }
 
