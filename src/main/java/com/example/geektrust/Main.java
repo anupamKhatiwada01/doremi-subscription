@@ -25,12 +25,6 @@ public class Main {
         // } catch (IOException e) {
         // }
 
-   
-      
-        
-
-
-
       // Lets  directly create objects and not bother about using complex structures
       List<Topup> topupList = new ArrayList<Topup>();
       topupList.add(new Topup("FOUR_DEVICE",4,1,50));
@@ -58,17 +52,25 @@ public class Main {
         podcastCategoryMap.put("personal",podcastArr[1]);
         podcastCategoryMap.put("premium",podcastArr[2]);
         planMap.put("podcast",podcastCategoryMap);
-        System.out.println("This is the plan map:");
-        System.out.println(planMap);
+        // System.out.println("This is the plan map:");
+        // System.out.println(planMap);
 
 
-      
-
+      // List<HashMap<String,String>>  planList= new ArrayList<HashMap<String,String>>();
+      Map<String,String> selectedPlans = new HashMap<String,String>();
+      // Hard coded plans for development
+      selectedPlans.put("music","personal");
+      selectedPlans.put("video","premium");
+      selectedPlans.put("podcast","free");
 
       Subscriber user = new Subscriber();
+      
+      // Add plans for the user
+      
+      
       // Add topup for user if it exists
       if(!topupType.equals("")){
-          List arr = topupList.stream().filter(a->a.getCategory().toUpperCase().equals(topupType.toUpperCase())).collect(Collectors.toList());
+          List<Topup> arr = topupList.stream().filter(a->a.getCategory().toUpperCase().equals(topupType.toUpperCase())).collect(Collectors.toList());
           Topup userTopup = (Topup)arr.get(0);
           userTopup.setTotalPrice(topupMonths);
           if(user.addTopUp(userTopup)==false){
@@ -76,23 +78,5 @@ public class Main {
           }
       }
 
-      // Add plans for the user
-      
-      
-      
-
-      
-
-      
-      
-
-      
-      
-      
-
-     
-      
-
-      
     }
 }
